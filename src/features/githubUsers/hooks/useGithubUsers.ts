@@ -1,15 +1,15 @@
 import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { QueryKeys } from 'common/queryKeys';
-import { GithubUser } from '../types';
+import { GithubResponse } from 'features/githubUsers/types';
 
-const getGithubUsers = async (context: QueryFunctionContext): Promise<GithubUser[]> => {
+const getGithubUsers = async (context: QueryFunctionContext): Promise<GithubResponse> => {
   try {
     const response = await axios.get(
       `https://api.github.com/search/users?q=${context.queryKey[1]}&page=${context.queryKey[2]}&per_page=10`,
     );
 
-    return response.data;
+    return response.data.items;
   } catch (_error) {
     throw new Error('Error while fetching github users');
   }
