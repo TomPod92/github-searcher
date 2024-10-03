@@ -1,16 +1,16 @@
-import { Box, Typography, Divider } from "@mui/material";
-import { SxProps, Theme } from "@mui/material/styles";
+import { Box, Typography, Divider } from '@mui/material';
+import { SxProps, Theme } from '@mui/material/styles';
 
 const pageStyles: SxProps<Theme> = {
   padding: (theme: Theme) => theme.spacing(3),
 };
 
 const dividerStyles: SxProps<Theme> = {
-  borderColor: "gray",
+  borderColor: 'gray',
 };
 
 const titleStyles: SxProps = {
-  fontSize: "1.4rem",
+  fontSize: '1.4rem',
 };
 
 interface Props {

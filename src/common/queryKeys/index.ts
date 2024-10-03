@@ -1,3 +1,3 @@
 export enum QueryKeys {
-  GithubUsers = "GithubUsers",
+  GithubUsers = 'GithubUsers',
 }

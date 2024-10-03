@@ -1,5 +1,5 @@
-import Page from "common/components/Page";
-import GithubUsersList from "features/githubUsers/components/GithubUsersList";
+import Page from 'common/components/Page';
+import GithubUsersList from 'features/githubUsers/components/GithubUsersList';
 
 const GithubUsersPage = () => {
   return (
