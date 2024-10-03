@@ -1,8 +1,7 @@
 import { Box } from "@mui/material";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Page from "common/components/Page";
-import GithubUsersList from "features/githubUsers/components/GithubUsersList";
+import GithubUsersPage from "pages/GithubUsersPage";
 
 const queryClient = new QueryClient();
 
@@ -11,9 +10,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <>
         <Box component="main">
-          <Page title="Github users list">
-            <GithubUsersList />
-          </Page>
+          <GithubUsersPage />
         </Box>
         <ReactQueryDevtools initialIsOpen={false} />
       </>
