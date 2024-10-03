@@ -1,17 +1,29 @@
-import { useEffect } from 'react';
+import React from 'react';
+import { useInView } from 'react-intersection-observer';
 import Search from 'common/components/Search';
 import { useGithubUsers } from 'features/githubUsers/hooks/useGithubUsers';
+import { GithubUser } from '../types';
 
 const GithubUsersList = () => {
-  const { data } = useGithubUsers({ page: 1 });
+  const { ref, inView } = useInView();
 
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
+  const { data, fetchNextPage, isFetchingNextPage, hasNextPage } = useGithubUsers();
 
   return (
     <>
       <Search />
+      {data?.pages?.map((group, index) => {
+        return (
+          <React.Fragment key={index}>
+            {group?.map((user: GithubUser) => {
+              return <div key={user.id}>{user.login}</div>;
+            })}
+          </React.Fragment>
+        );
+      })}
+      <button onClick={() => fetchNextPage()} ref={ref}>
+        NExt
+      </button>
     </>
   );
 };

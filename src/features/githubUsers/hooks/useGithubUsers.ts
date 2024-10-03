@@ -1,13 +1,13 @@
 import { useSearchParams } from 'react-router-dom';
-import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
+import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { QueryKeys } from 'common/queryKeys';
-import { GithubResponse } from 'features/githubUsers/types';
+import { GithubUser } from '../types';
 
-const getGithubUsers = async (context: QueryFunctionContext): Promise<GithubResponse> => {
+const getGithubUsers = async (context: QueryFunctionContext): Promise<GithubUser[]> => {
   try {
     const response = await axios.get(
-      `https://api.github.com/search/users?q=${context.queryKey[1]}&page=${context.queryKey[2]}&per_page=10`,
+      `https://api.github.com/search/users?q=${context.queryKey[1]}&page=${context.pageParam}&per_page=10`,
     );
 
     return response.data.items;
@@ -16,17 +16,17 @@ const getGithubUsers = async (context: QueryFunctionContext): Promise<GithubResp
   }
 };
 
-interface Props {
-  page: number;
-  enabled?: boolean;
-}
-
-export const useGithubUsers = ({ page, enabled = true }: Props) => {
+export const useGithubUsers = () => {
   const [searchParams] = useSearchParams();
   const user = searchParams.get('user');
-  return useQuery({
-    queryKey: [QueryKeys.GithubUsers, user, page],
-    queryFn: (context) => getGithubUsers(context),
-    enabled: !!user && enabled,
+
+  return useInfiniteQuery({
+    queryKey: [QueryKeys.GithubUsers, user],
+    queryFn: getGithubUsers,
+    initialPageParam: 0,
+    getNextPageParam: (_lastPage, allPages) => {
+      return allPages.length + 1;
+    },
+    enabled: !!user,
   });
 };
