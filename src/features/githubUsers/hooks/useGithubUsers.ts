@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { QueryKeys } from 'common/queryKeys';
@@ -16,14 +17,13 @@ const getGithubUsers = async (context: QueryFunctionContext): Promise<GithubResp
 };
 
 interface Props {
-  user?: string;
   page: number;
   enabled?: boolean;
 }
 
-export const useGithubUsers = ({ user, page, enabled = true }: Props) => {
-  //   const location = useLocation();
-
+export const useGithubUsers = ({ page, enabled = true }: Props) => {
+  const [searchParams] = useSearchParams();
+  const user = searchParams.get('user');
   return useQuery({
     queryKey: [QueryKeys.GithubUsers, user, page],
     queryFn: (context) => getGithubUsers(context),
