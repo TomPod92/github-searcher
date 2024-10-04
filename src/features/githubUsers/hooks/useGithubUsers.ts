@@ -7,7 +7,7 @@ import { GithubUser } from '../types';
 const getGithubUsers = async (context: QueryFunctionContext): Promise<GithubUser[]> => {
   try {
     const response = await axios.get(
-      `https://api.github.com/search/users?q=${context.queryKey[1]}&page=${context.pageParam}&per_page=10`,
+      `https://api.github.com/search/users?q=${context.queryKey[1]}&page=${context.pageParam}&per_page=20`,
     );
 
     return response.data.items;
@@ -24,8 +24,8 @@ export const useGithubUsers = () => {
     queryKey: [QueryKeys.GithubUsers, user],
     queryFn: getGithubUsers,
     initialPageParam: 0,
-    getNextPageParam: (_lastPage, allPages) => {
-      return allPages.length + 1;
+    getNextPageParam: (_lastPage, _allPages, lastPageParam) => {
+      return lastPageParam + 1;
     },
     enabled: !!user,
   });

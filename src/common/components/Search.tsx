@@ -11,7 +11,12 @@ const inputStyles: SxProps<Theme> = {
 
 const searchDebounceTime = 2000;
 
-const Search = () => {
+interface Props {
+  isLoading?: boolean;
+  sx?: SxProps<Theme>;
+}
+
+const Search = ({ isLoading, sx }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('user') || '');
 
@@ -42,7 +47,8 @@ const Search = () => {
       size="small"
       value={searchTerm}
       onChange={handleChange}
-      sx={inputStyles}
+      disabled={isLoading}
+      sx={{ ...inputStyles, ...sx }}
     />
   );
 };
