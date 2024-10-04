@@ -27,8 +27,8 @@ const Search = ({ isLoading, sx }: Props) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSearchParams((prev) => {
-        if (searchTerm) {
-          prev.set('user', searchTerm);
+        if (searchTerm.trim()) {
+          prev.set('user', searchTerm.trim());
         } else {
           prev.delete('user');
         }
