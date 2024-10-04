@@ -1,5 +1,6 @@
-import { Avatar, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { SxProps, Theme } from '@mui/material/styles';
+import Avatar from 'common/components/Avatar';
 import { GithubUser as GithubUserType } from 'features/githubUsers/types';
 
 const containerStyles: SxProps<Theme> = {
