@@ -37,7 +37,6 @@ const Search = ({ isLoading, sx }: Props) => {
     }, searchDebounceTime);
 
     return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
   return (

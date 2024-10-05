@@ -23,10 +23,8 @@ export const useGithubUsers = () => {
   return useInfiniteQuery({
     queryKey: [QueryKeys.GithubUsers, user],
     queryFn: getGithubUsers,
-    initialPageParam: 0,
-    getNextPageParam: (_lastPage, _allPages, lastPageParam) => {
-      return lastPageParam + 1;
-    },
+    initialPageParam: 1,
+    getNextPageParam: (_lastPage, _allPages, lastPageParam) => lastPageParam + 1,
     enabled: !!user,
   });
 };

@@ -32,15 +32,9 @@ const GithubUsersList = () => {
     <>
       <Search isLoading={isFetchingNextPage} sx={searchStyles} />
       <Spacer>
-        {data?.pages?.map((group, index) => {
-          return (
-            <React.Fragment key={index}>
-              {group?.map((user) => {
-                return <GithubUser key={user.id} user={user} />;
-              })}
-            </React.Fragment>
-          );
-        })}
+        {data?.pages?.map((group, index) => (
+          <React.Fragment key={index}>{group?.map((user) => <GithubUser key={user.id} user={user} />)}</React.Fragment>
+        ))}
       </Spacer>
       <ListSkeleton isLoading={isLoading} />
       {!user && <Typography>Use input to search for a github user</Typography>}

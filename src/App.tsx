@@ -10,12 +10,10 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <>
-          <Box component="main">
-            <GithubUsersPage />
-          </Box>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </>
+        <Box component="main">
+          <GithubUsersPage />
+        </Box>
+        <ReactQueryDevtools initialIsOpen={false} />
       </BrowserRouter>
     </QueryClientProvider>
   );

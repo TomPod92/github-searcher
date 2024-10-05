@@ -7,6 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
+// functional programming - composition
 const Spacer = ({ direction = 'column', space = 10, children }: Props) => {
   const containerStyles: SxProps<Theme> = {
     display: 'flex',
