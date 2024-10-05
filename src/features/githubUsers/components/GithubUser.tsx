@@ -8,7 +8,6 @@ const containerStyles: SxProps<Theme> = {
   alignItems: 'center',
   gap: (theme: Theme) => theme.spacing(1),
   padding: (theme: Theme) => theme.spacing(1),
-  marginBottom: (theme: Theme) => theme.spacing(1),
 };
 
 interface Props {

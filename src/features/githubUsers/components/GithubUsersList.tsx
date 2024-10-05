@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { SxProps, Theme } from '@mui/material/styles';
 import Search from 'common/components/Search';
+import Spacer from 'common/components/Spacer';
 import GithubUser from 'features/githubUsers/components/GithubUser';
 import { useGithubUsers } from 'features/githubUsers/hooks/useGithubUsers';
 import ListSkeleton from './ListSkeleton';
@@ -30,15 +31,17 @@ const GithubUsersList = () => {
   return (
     <>
       <Search isLoading={isFetchingNextPage} sx={searchStyles} />
-      {data?.pages?.map((group, index) => {
-        return (
-          <React.Fragment key={index}>
-            {group?.map((user) => {
-              return <GithubUser key={user.id} user={user} />;
-            })}
-          </React.Fragment>
-        );
-      })}
+      <Spacer>
+        {data?.pages?.map((group, index) => {
+          return (
+            <React.Fragment key={index}>
+              {group?.map((user) => {
+                return <GithubUser key={user.id} user={user} />;
+              })}
+            </React.Fragment>
+          );
+        })}
+      </Spacer>
       <ListSkeleton isLoading={isLoading} />
       {!user && <Typography>Use input to search for a github user</Typography>}
       {isEmpty && <Typography>No data :(</Typography>}
